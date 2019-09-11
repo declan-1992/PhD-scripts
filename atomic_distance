@@ -1,0 +1,29 @@
+#!/usr/bin/python
+  
+from math import *
+import numpy
+
+ptsx = numpy.loadtxt('test_xx')
+ptsy = numpy.loadtxt('test_yy')
+
+output = open("output.dat","w+")
+
+#ptsx = ptsxx.readlines()
+#ptsy = ptsyy.readlines()
+
+length=len(ptsx)
+
+
+
+for i in range(length):
+        for j in range(length):
+
+                X = (ptsx[i]+ptsx[j])/2
+                Y = (ptsy[i]+ptsy[j])/2
+
+                dist = numpy.sqrt((ptsx[i]-ptsx[j])**2+(ptsy[i]-ptsy[j])**2)
+                if dist > 0.5 and dist < 2.5:
+                        #print X, Y, dist
+                        output.write("%10.8e %10.8e %10.8e\n" % (X, Y, dist))
+
+output.close()
