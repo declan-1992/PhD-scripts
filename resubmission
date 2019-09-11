@@ -1,0 +1,19 @@
+#!/bin/bash
+
+qsub sub.sh
+a=$(qstat -u declan92 | tail -n 1 | awk '{print $1}' | cut -c 1-7)
+echo $a
+
+while qstat -f $a | grep -q Output_Path
+echo $a 
+do
+        if grep -q "Voluntary context switches" OUTCAR; then
+                mv CONTCAR POSCAR
+                qsub sub.sh
+                sleep 7200
+        else
+                echo Come back later
+                sleep 7200
+        fi
+a=$(qstat -u declan92 | tail -n 1 | awk '{print $1}' | cut -c 1-7)
+done            
