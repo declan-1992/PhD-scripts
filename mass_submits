@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for a in *
+do
+cd $a
+mv CONTCAR POSCAR
+cp ~/sub_mpi.sh .
+qsub sub_mpi.sh
+cd ..
+done
