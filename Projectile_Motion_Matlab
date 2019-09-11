@@ -1,0 +1,46 @@
+%Projectile motion
+%By Declan Scullion
+m= input('Mass (kg): ');
+A= input('Area (m^2): ');
+v0= input('Initial velocity(m/s): ');
+a= input('Angle of projection(in degrees): ');
+h= input('Time step (in seconds): ');
+rho=1.275; %air density
+D=0.5;    %drag coefficient
+a=a*pi/180;   %degrees to rons
+g=9.81;
+y1=0;
+x1=0;
+v0X=v0*cos(a);
+v0Y=v0*sin(a);
+xmax=2*(v0^2*sin(2*a)/g);
+ymax=2*(v0^2*sin(a)^2/(2*g));
+figure('color','white');
+aX=0;
+aY=0;
+td=8;
+for t=0:h:td+h
+
+    x1=x1+v0X*h+(1/2)*aX*h^2; %change in position
+    y1=y1+v0Y*h+(1/2)*aY*h^2;
+ 
+    plot(x1,y1,'bo')
+    
+    hold all
+    xlim([0 4]);
+    ylim([0 4]);
+    title('Projectile Motion');
+    xlabel('Distance in meters');
+    ylabel('Height in meters');
+    getframe;
+    dragX=-0.5*D*rho*A*v0X^2;   %drag force
+    dragY=-0.5*D*rho*A*v0Y^2-m*g;
+    aX=dragX/m;    %acceleration
+    aY=dragY/m;
+    
+    v0X=v0X+aX*h; %change in velocity
+    v0Y=v0Y+aY*h;
+    if y1<0
+        break
+    end    
+end
