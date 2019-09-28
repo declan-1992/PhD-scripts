@@ -23,8 +23,7 @@ class Body(Turtle):
     px = py = 0.0
     
     def attraction(self, other):
-        """(Body): (fx, fy)
-
+        """
         Returns the force exerted upon this body by the other body.
         """
         # Report an error if the other object is the same as this one.
@@ -38,13 +37,7 @@ class Body(Turtle):
         dx = (ox-sx)
         dy = (oy-sy)
         d = math.sqrt(dx**2 + dy**2)
-
-        # Report an error if the distance is zero; otherwise we'll
-        # get a ZeroDivisionError exception further down.
-        if d == 0:
-            raise ValueError("Collision between objects %r and %r"
-                             % (self.name, other.name))
-
+        
         # Compute the force of attraction
         f = G * self.mass * other.mass / (d**2)
 
@@ -55,9 +48,8 @@ class Body(Turtle):
         return fx, fy
 
 def update_info(step, bodies):
-    """(int, [Body])
-    
-    Displays information about the status of the simulation.
+    """
+    Output information about the status of the simulation.
     """
     print('Step #{}'.format(step))
     for body in bodies:
@@ -67,9 +59,8 @@ def update_info(step, bodies):
     print()
 
 def loop(bodies):
-    """([Body])
-
-    Never returns; loops through the simulation, updating the
+    """
+    Loops through the simulation, updating the
     positions of all the provided bodies.
     """
     timestep = 24*3600  # One day
