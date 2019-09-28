@@ -11,7 +11,7 @@ open INPUTFILE, 'hexagon_bridge.sdb' or die "Couldn't open the input file: $!";
 while (<INPUTFILE>) {
         my $line = $_;
 
-        if ($line =~ /^Species: C_vdw/) {#if line contains string copt to output
+        if ($line =~ /^Species: C_vdw/) {#if line contains string send to output
         $grab_lines = 1;
         next;
         }
